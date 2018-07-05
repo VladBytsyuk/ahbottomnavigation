@@ -15,6 +15,7 @@ import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Px;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
@@ -107,6 +108,8 @@ public class AHBottomNavigation extends FrameLayout {
 	private boolean needHideBottomNavigation = false;
 	private boolean hideBottomNavigationWithAnimation = false;
 	private boolean soundEffectsEnabled = true;
+	private boolean customConstantTopMargin = false;
+	private int customConstantTopMarginValue;
 
 	// Variables (Styles)
 	private Typeface titleTypeface;
@@ -458,6 +461,10 @@ public class AHBottomNavigation extends FrameLayout {
 						paramsNotification.rightMargin, paramsNotification.bottomMargin);
 			}
 
+			if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams && customConstantTopMargin) {
+				setCustomPadding(icon, notification);
+			}
+
 			if (colored) {
 				if (current) {
 					setBackgroundColor(item.getColor(context));
@@ -583,6 +590,10 @@ public class AHBottomNavigation extends FrameLayout {
 						notification.getLayoutParams();
 				paramsNotification.setMargins(notificationInactiveMarginLeft, notificationInactiveMarginTop,
 						paramsNotification.rightMargin, paramsNotification.bottomMargin);
+			}
+
+			if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams && customConstantTopMargin) {
+				setCustomPadding(icon, notification);
 			}
 
 			if (colored) {
@@ -993,6 +1004,22 @@ public class AHBottomNavigation extends FrameLayout {
 		icon.requestLayout();
 	}
 
+	private void setCustomPadding(ImageView icon, TextView notification) {
+		if (!customConstantTopMargin) return;
+		ViewGroup.MarginLayoutParams iconParams = (ViewGroup.MarginLayoutParams) icon.getLayoutParams();
+		iconParams.setMargins(iconParams.leftMargin,
+				customConstantTopMarginValue, iconParams.rightMargin, iconParams.bottomMargin);
+
+		ViewGroup.MarginLayoutParams notificationParams = (ViewGroup.MarginLayoutParams) notification.getLayoutParams();
+		notificationParams.setMargins(notificationParams.leftMargin,
+				customConstantTopMarginValue - dp2px(2), notificationParams.rightMargin, notificationParams.bottomMargin);
+	}
+
+	public int dp2px(int dp) {
+		Resources resources = context.getResources();
+		DisplayMetrics metrics = resources.getDisplayMetrics();
+		return dp * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+	}
 
 	////////////
 	// PUBLIC //
@@ -1192,6 +1219,11 @@ public class AHBottomNavigation extends FrameLayout {
 	public void setSelectedBackgroundVisible(boolean visible) {
 		this.selectedBackgroundVisible = visible;
 		createItems();
+	}
+
+	public void setTopMargin(@Px int topMarginPx) {
+		customConstantTopMargin = true;
+		customConstantTopMarginValue = topMarginPx;
 	}
 
 	/**
