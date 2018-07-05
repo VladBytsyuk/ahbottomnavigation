@@ -23,6 +23,7 @@ import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
@@ -63,6 +64,17 @@ public class AHBottomNavigation extends FrameLayout {
 		ALWAYS_HIDE
 	}
 
+	//Icon size
+	private class ItemIconSize {
+		int width;
+		int height;
+
+		ItemIconSize(int width, int height) {
+			this.width = width;
+			this.height = height;
+		}
+	}
+
 	// Static
 	private static String TAG = "AHBottomNavigation";
     private static final String EXCEPTION_INDEX_OUT_OF_BOUNDS = "The position (%d) is out of bounds of the items (%d elements)";
@@ -78,6 +90,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private Resources resources;
 	private ArrayList<AHBottomNavigationItem> items = new ArrayList<>();
 	private ArrayList<View> views = new ArrayList<>();
+	private SparseArray<ItemIconSize> iconSizes = new SparseArray<>();
 	private AHBottomNavigationBehavior<AHBottomNavigation> bottomNavigationBehavior;
 	private LinearLayout linearLayoutContainer;
 	private View backgroundColorView;
@@ -410,6 +423,8 @@ public class AHBottomNavigation extends FrameLayout {
 			icon.setImageDrawable(item.getDrawable(context));
 			title.setText(item.getTitle(context));
 
+			fitIconToIconSize(icon, iconSizes.get(i));
+
 			if (titleTypeface != null) {
 				title.setTypeface(titleTypeface);
 			}
@@ -527,6 +542,8 @@ public class AHBottomNavigation extends FrameLayout {
 			TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
 			TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
 			icon.setImageDrawable(item.getDrawable(context));
+
+			fitIconToIconSize(icon, iconSizes.get(i));
 
 			if (titleState != TitleState.ALWAYS_HIDE) {
 				title.setText(item.getTitle(context));
@@ -662,6 +679,8 @@ public class AHBottomNavigation extends FrameLayout {
 				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_item_icon);
 				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
 
+				fitIconToIconSize(icon, iconSizes.get(i));
+
 				icon.setSelected(true);
 				AHHelper.updateTopMargin(icon, inactiveMarginTop, activeMarginTop);
 				AHHelper.updateLeftMargin(notification, notificationInactiveMarginLeft, notificationActiveMarginLeft);
@@ -723,6 +742,8 @@ public class AHBottomNavigation extends FrameLayout {
 				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_item_icon);
 				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
 
+				fitIconToIconSize(icon, iconSizes.get(i));
+
 				icon.setSelected(false);
 				AHHelper.updateTopMargin(icon, activeMarginTop, inactiveMarginTop);
 				AHHelper.updateLeftMargin(notification, notificationActiveMarginLeft, notificationInactiveMarginLeft);
@@ -782,6 +803,8 @@ public class AHBottomNavigation extends FrameLayout {
 				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
 				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_small_item_icon);
 				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+
+				fitIconToIconSize(icon, iconSizes.get(i));
 
 				icon.setSelected(true);
 
@@ -849,6 +872,8 @@ public class AHBottomNavigation extends FrameLayout {
 				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
 				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_small_item_icon);
 				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
+
+				fitIconToIconSize(icon, iconSizes.get(i));
 
 				icon.setSelected(false);
 
@@ -959,6 +984,15 @@ public class AHBottomNavigation extends FrameLayout {
 		}
 	}
 
+	/**
+	 *	Update item's icon size due to saved values from {@code iconSizes}
+	 */
+	private void fitIconToIconSize(ImageView icon, ItemIconSize size) {
+		icon.getLayoutParams().width = size.width;
+		icon.getLayoutParams().height = size.height;
+		icon.requestLayout();
+	}
+
 
 	////////////
 	// PUBLIC //
@@ -968,10 +1002,26 @@ public class AHBottomNavigation extends FrameLayout {
 	 * Add an item
 	 */
 	public void addItem(AHBottomNavigationItem item) {
+		final int iconSizePx = (int) getResources().getDimension(R.dimen.bottom_navigation_icon);
+		addItem(item, iconSizePx);
+	}
+
+	/**
+	 * Add an item and saves size of it's icon
+	 */
+	public void addItem(AHBottomNavigationItem item, int iconSizePx) {
+		addItem(item, iconSizePx, iconSizePx);
+	}
+
+	/**
+	 * Add an item and saves width and height of it's icon
+	 */
+	public void addItem(AHBottomNavigationItem item, int iconWidthPx, int iconHeightPx) {
 		if (this.items.size() > MAX_ITEMS) {
 			Log.w(TAG, "The items list should not have more than 5 items");
 		}
 		items.add(item);
+		iconSizes.append(items.indexOf(item), new ItemIconSize(iconWidthPx, iconHeightPx));
 		createItems();
 	}
 
@@ -979,10 +1029,28 @@ public class AHBottomNavigation extends FrameLayout {
 	 * Add all items
 	 */
 	public void addItems(List<AHBottomNavigationItem> items) {
+		final int iconSizePx = (int) getResources().getDimension(R.dimen.bottom_navigation_icon);
+		addItems(items, iconSizePx);
+	}
+
+	/**
+	 * Add all items and saves size of it's icon
+	 */
+	public void addItems(List<AHBottomNavigationItem> items, int iconSizePx) {
+		addItems(items, iconSizePx, iconSizePx);
+	}
+
+	/**
+	 * Add all items and saves width and height of it's icon
+	 */
+	public void addItems(List<AHBottomNavigationItem> items, int iconWidthPx, int iconHeightPx) {
 		if (items.size() > MAX_ITEMS || (this.items.size() + items.size()) > MAX_ITEMS) {
 			Log.w(TAG, "The items list should not have more than 5 items");
 		}
 		this.items.addAll(items);
+		for (AHBottomNavigationItem item : items) {
+			iconSizes.append(this.items.indexOf(item), new ItemIconSize(iconWidthPx, iconHeightPx));
+		}
 		createItems();
 	}
 
