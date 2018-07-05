@@ -67,10 +67,10 @@ public class AHBottomNavigation extends FrameLayout {
 
 	//Icon size
 	private class ItemIconSize {
-		int width;
-		int height;
+		@Px int width;
+		@Px int height;
 
-		ItemIconSize(int width, int height) {
+		ItemIconSize(@Px int width, @Px int height) {
 			this.width = width;
 			this.height = height;
 		}
@@ -1036,14 +1036,14 @@ public class AHBottomNavigation extends FrameLayout {
 	/**
 	 * Add an item and saves size of it's icon
 	 */
-	public void addItem(AHBottomNavigationItem item, int iconSizePx) {
+	public void addItem(AHBottomNavigationItem item, @Px int iconSizePx) {
 		addItem(item, iconSizePx, iconSizePx);
 	}
 
 	/**
 	 * Add an item and saves width and height of it's icon
 	 */
-	public void addItem(AHBottomNavigationItem item, int iconWidthPx, int iconHeightPx) {
+	public void addItem(AHBottomNavigationItem item, @Px int iconWidthPx, @Px int iconHeightPx) {
 		if (this.items.size() > MAX_ITEMS) {
 			Log.w(TAG, "The items list should not have more than 5 items");
 		}
@@ -1063,14 +1063,14 @@ public class AHBottomNavigation extends FrameLayout {
 	/**
 	 * Add all items and saves size of it's icon
 	 */
-	public void addItems(List<AHBottomNavigationItem> items, int iconSizePx) {
+	public void addItems(List<AHBottomNavigationItem> items, @Px int iconSizePx) {
 		addItems(items, iconSizePx, iconSizePx);
 	}
 
 	/**
 	 * Add all items and saves width and height of it's icon
 	 */
-	public void addItems(List<AHBottomNavigationItem> items, int iconWidthPx, int iconHeightPx) {
+	public void addItems(List<AHBottomNavigationItem> items, @Px int iconWidthPx, @Px int iconHeightPx) {
 		if (items.size() > MAX_ITEMS || (this.items.size() + items.size()) > MAX_ITEMS) {
 			Log.w(TAG, "The items list should not have more than 5 items");
 		}
