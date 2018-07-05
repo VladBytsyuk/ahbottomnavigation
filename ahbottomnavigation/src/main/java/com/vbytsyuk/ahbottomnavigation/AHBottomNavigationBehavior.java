@@ -1,4 +1,4 @@
-package com.aurelhubert.ahbottomnavigation;
+package com.vbytsyuk.ahbottomnavigation;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation.OnNavigationPositionListener;
 
 /**
  *
@@ -39,7 +38,7 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 	private boolean fabBottomMarginInitialized = false;
 	private float targetOffset = 0, fabTargetOffset = 0, fabDefaultBottomMargin = 0, snackBarY = 0;
 	private boolean behaviorTranslationEnabled = true;
-	private OnNavigationPositionListener navigationPositionListener;
+	private AHBottomNavigation.OnNavigationPositionListener navigationPositionListener;
 
 	/**
 	 * Constructor
@@ -245,7 +244,7 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 	/**
 	 * Set OnNavigationPositionListener
 	 */
-	public void setOnNavigationPositionListener(OnNavigationPositionListener navigationHeightListener) {
+	public void setOnNavigationPositionListener(AHBottomNavigation.OnNavigationPositionListener navigationHeightListener) {
 		this.navigationPositionListener = navigationHeightListener;
 	}
 
