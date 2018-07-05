@@ -1001,7 +1001,6 @@ public class AHBottomNavigation extends FrameLayout {
 	private void fitIconToIconSize(ImageView icon, ItemIconSize size) {
 		icon.getLayoutParams().width = size.width;
 		icon.getLayoutParams().height = size.height;
-		icon.requestLayout();
 	}
 
 	private void setCustomPadding(ImageView icon, TextView notification) {
