@@ -2,7 +2,7 @@
 # AHBottomNavigation
 Library to implement the Bottom Navigation component from Material Design guidelines (minSdkVersion=14).
 
-Bintray package: https://bintray.com/vladbytsyuk/maven/ahbottomnavigation
+<a href='https://bintray.com/vladbytsyuk/maven/ahbottomnavigation?source=watch' alt='Get automatic notifications about new "ahbottomnavigation" versions'><img src='https://www.bintray.com/docs/images/bintray_badge_color.png'></a>
 
 ## Demo
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
