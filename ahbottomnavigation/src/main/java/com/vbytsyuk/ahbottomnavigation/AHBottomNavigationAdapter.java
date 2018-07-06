@@ -1,4 +1,4 @@
-package com.aurelhubert.ahbottomnavigation;
+package com.vbytsyuk.ahbottomnavigation;
 
 import android.app.Activity;
 import android.support.annotation.ColorInt;

@@ -2,22 +2,23 @@ apply plugin: 'com.android.library'
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'ah-bottom-navigation'
+    bintrayName = 'ahbottomnavigation'
 
-    publishedGroupId = 'com.aurelhubert'
+    publishedGroupId = 'io.github.vladbytsyuk'
     libraryName = 'AHBottomNavigation'
     artifact = 'ahbottomnavigation'
 
-    libraryDescription = 'A library to reproduce the behavior of the Bottom Navigation guidelines from Material Design.'
+    libraryDescription = 'Fork of a library (https://github.com/aurelhubert/ahbottomnavigation) ' +
+            'to reproduce the behaviour of the Bottom Navigation guidelines from Material Design.'
 
-    siteUrl = 'https://github.com/aurelhubert/ahbottomnavigation'
-    gitUrl = 'https://github.com/aurelhubert/ahbottomnavigation.git'
+    siteUrl = 'https://github.com/VladBytsyuk/ahbottomnavigation'
+    gitUrl = 'https://github.com/VladBytsyuk/ahbottomnavigation.git'
 
-    libraryVersion = '2.1.0'
+    libraryVersion = '2.3.1'
 
-    developerId = 'aurelhubert'
-    developerName = 'Aurelien Hubert'
-    developerEmail = 'aurel.hubert@gmail.com'
+    developerId = 'Vladislav Bytsyuk <vladislav.bytsyuk@gmail.com>'
+    developerName = 'Vladislav Bytsyuk'
+    developerEmail = 'vladislav.bytsyuk@gmail.com'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
@@ -25,14 +26,14 @@ ext {
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 26
-        versionCode 40
-        versionName "2.1.0"
+        targetSdkVersion 27
+        versionCode 41
+        versionName "2.3.1"
     }
     buildTypes {
         release {
@@ -43,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:design:27.1.1'
 }
 
 // Place it at the end of the file

@@ -1,4 +1,4 @@
-package com.aurelhubert.ahbottomnavigation;
+package com.vbytsyuk.ahbottomnavigation;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

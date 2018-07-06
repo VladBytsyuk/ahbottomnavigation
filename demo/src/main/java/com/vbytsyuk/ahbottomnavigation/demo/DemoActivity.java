@@ -1,4 +1,4 @@
-package com.aurelhubert.ahbottomnavigation.demo;
+package com.vbytsyuk.ahbottomnavigation.demo;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -15,11 +15,11 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
-import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
+import com.vbytsyuk.ahbottomnavigation.AHBottomNavigation;
+import com.vbytsyuk.ahbottomnavigation.AHBottomNavigationAdapter;
+import com.vbytsyuk.ahbottomnavigation.AHBottomNavigationItem;
+import com.vbytsyuk.ahbottomnavigation.AHBottomNavigationViewPager;
+import com.vbytsyuk.ahbottomnavigation.notification.AHNotification;
 
 import java.util.ArrayList;
 

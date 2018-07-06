@@ -1,4 +1,4 @@
-package com.aurelhubert.ahbottomnavigation.notification;
+package com.vbytsyuk.ahbottomnavigation.notification;
 
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
